@@ -1,17 +1,42 @@
-import { useState } from 'react'
-import './App.css'
-import Home from './components/home/Home.jsx'
-import Footer from './components/footer/Footer.jsx'
-import Header from './components/header/Header.jsx'
+import { Routes, Route } from 'react-router-dom';
+import Header from './components/layout/Header.jsx';
+import Footer from './components/layout/Footer.jsx';
+import Home from './components/pages/Home.jsx';
+import Login from './components/pages/Login.jsx';
+import Register from './components/pages/Register.jsx';
+import Contact from './components/pages/Contact.jsx';
+import FAQ from './components/pages/FAQ.jsx';
+import TopicCreate from './components/pages/TopicCreate.jsx';
+import TopicDetails from './components/pages/TopicDetails.jsx';
+import UserEdit from './components/pages/UserEdit.jsx';
+import UserProfile from './components/pages/UserProfile.jsx';
+import NotFound from './components/pages/NotFound.jsx';
 
- export default function App() {
-  const [count, setCount] = useState(0)
+export default function App() {
   return (
-    <main>
-    <Header />
-    <Home />
-    <Footer />
-    </main>
-  
-  )
+    <div className="app">
+      <Header />
+
+      <main className="main-content">
+    <Routes>
+      <Route path="/login" element={<Login />} />
+      <Route path="/register" element={<Register />} />
+
+      <Route path="/contact" element={<Contact />} />
+      <Route path="/faq" element={<FAQ />} />
+
+
+      <Route path="/" element={<Home />} />
+      <Route path="/topics/create" element={<TopicCreate />} />
+      <Route path="/topics/:topicId" element={<TopicDetails />} />
+      <Route path="/profile/edit" element={<UserEdit />} />
+      <Route path="/users/:userId" element={<UserProfile />} />
+
+      <Route path="*" element={<NotFound />} />
+    </Routes>
+      </main>
+
+      <Footer />
+    </div>
+  );
 }
