@@ -1,54 +1,66 @@
-import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
-import * as profileService from '../../utils/profileService.js';
-import * as topicService from '../../utils/topicService.js';
-import TopicCard from '../topics/TopicCard.jsx';
-import Spinner from '../common/Spinner.jsx';
-import ErrorBox from '../common/ErrorBox.jsx';
+import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import * as profileService from "../../utils/profileService.js";
+import * as topicService from "../../utils/topicService.js";
+import * as profileLikeService from "../../utils/profileLikeService.js";
+import TopicCard from "../topics/TopicCard.jsx";
+import Spinner from "../common/Spinner.jsx";
+import { useAuth } from "../../contexts/AuthContext.jsx";
+import { useProfile } from "../../contexts/ProfileContext.jsx";
 
 export default function UserProfile() {
   const { userId } = useParams();
+  const { user } = useAuth();
+  const { profile: mainProfile } = useProfile();
+
   const [profile, setProfile] = useState(null);
   const [topics, setTopics] = useState([]);
-  const [likeCount, setLikeCount] = useState(0); 
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState('');
+  const [profileLikes, setProfileLikes] = useState([]);
+  const [userProfileLike, setUserProfileLike] = useState(null);
+  const [error, setError] = useState("");
+
+  const isSelf = userId === user._id;
+
   const DEFAULT_AVATAR =
-  'https://i.ibb.co/6sFq5Xw/default-avatar.png';
+    "https://i0.wp.com/digitalhealthskills.com/wp-content/uploads/2022/11/3da39-no-user-image-icon-27.png?fit=500%2C500&ssl=1";
 
   useEffect(() => {
-    let isMounted = true;
+    let active = true;
 
     const load = async () => {
+      setLoading(true);
+      if (isSelf && mainProfile) {
+        setProfile(mainProfile);
+      } else {
+        const data = await profileService.getByUserId(userId);
+        if (active) setProfile(data || null);
+      }
       try {
-        const [profileData, allTopics] = await Promise.all([
-          profileService.getByUserId(userId),
+        const [allTopics, allLikes, myLike] = await Promise.all([
           topicService.getAll(),
+          profileLikeService.getLikesForProfile(userId),
+          profileLikeService.userLikedProfile(userId, user._id),
         ]);
 
-        if (!isMounted) return;
+        if (!active) return;
 
-        setProfile(profileData || null);
         setTopics(allTopics.filter((t) => t._ownerId === userId));
+        setProfileLikes(allLikes);
+        setUserProfileLike(myLike);
       } catch (err) {
-        if (!isMounted) return;
-        setError(err.message);
-      } finally {
-        if (!isMounted) return;
-        setLoading(false);
+        if (active) setError(err.message);
       }
+
+      if (active) setLoading(false);
     };
 
     load();
 
     return () => {
-      isMounted = false;
+      active = false;
     };
-  }, [userId]);
-
-  const likeProfileHandler = () => {
-    setLikeCount((c) => c + 1); 
-  };
+  }, [userId, isSelf, mainProfile, user._id]);
 
   if (loading) {
     return (
@@ -58,28 +70,66 @@ export default function UserProfile() {
     );
   }
 
+  if (!profile) {
+    return (
+      <section className="page">
+        <h2>User profile not found.</h2>
+      </section>
+    );
+  }
+
   return (
     <section className="page">
-      <ErrorBox message={error} />
-
       <article className="user-profile">
-             <img
+        <img
           className="sidebar-avatar"
-          src={profile?.avatarUrl || DEFAULT_AVATAR}
+          src={profile.avatarUrl || DEFAULT_AVATAR}
         />
 
-        <h2>{profile?.firstName} {profile?.lastName}</h2>
+        <h2>
+          {profile.firstName || "Unnamed"} {profile.lastName || ""}
+        </h2>
 
-        <p><strong>Job:</strong> {profile?.job || '—'}</p>
-        <p><strong>Age:</strong> {profile?.age || '—'}</p>
-        <p><strong>Nationality:</strong> {profile?.nationality || '—'}</p>
+        <p>
+          <strong>Job:</strong> {profile.job || "—"}
+        </p>
+        <p>
+          <strong>Age:</strong> {profile.age || "—"}
+        </p>
+        <p>
+          <strong>Nationality:</strong> {profile.nationality || "—"}
+        </p>
 
-        <p className="user-email">{profile?.email}</p>
-        <p className="user-bio">{profile?.bio}</p>
+        <p className="user-email">{profile.email}</p>
+        <p className="user-bio">{profile.bio}</p>
 
-        <button className="btn btn-secondary btn-small" onClick={likeProfileHandler}>
-          👍 Like profile ({likeCount})
-        </button>
+        {userId !== user._id && (
+          <button
+            className="btn btn-secondary btn-small"
+            onClick={async () => {
+              try {
+                if (!userProfileLike) {
+                  const created = await profileLikeService.like({
+                    profileUserId: userId,
+                  });
+                  setProfileLikes((prev) => [...prev, created]);
+                  setUserProfileLike(created);
+                } else {
+                  await profileLikeService.unlike(userProfileLike._id);
+                  setProfileLikes((prev) =>
+                    prev.filter((l) => l._id !== userProfileLike._id)
+                  );
+                  setUserProfileLike(null);
+                }
+              } catch (err) {
+                console.error(err.message);
+              }
+            }}
+          >
+            {userProfileLike ? "👎 Unlike Profile" : "👍 Like Profile"} (
+            {profileLikes.length})
+          </button>
+        )}
       </article>
 
       <section>

@@ -1,26 +1,13 @@
 import { Link } from 'react-router-dom';
 import { useAuth } from '../../contexts/AuthContext.jsx';
-import * as profileService from '../../utils/profileService.js';
-import { useEffect, useState } from 'react';
+import { useProfile } from '../../contexts/ProfileContext.jsx';
 
 const DEFAULT_AVATAR =
   'https://i.ibb.co/6sFq5Xw/default-avatar.png';
 
 export default function Sidebar() {
   const { user } = useAuth();
-  const [profile, setProfile] = useState(null);
-
-  useEffect(() => {
-    if (!user) return;
-
-    let ignore = false;
-
-    profileService.getMyProfile(user._id).then((p) => {
-      if (!ignore) setProfile(p);
-    });
-
-    return () => (ignore = true);
-  }, [user]);
+  const { profile } = useProfile();
 
   if (!user) return null;
 

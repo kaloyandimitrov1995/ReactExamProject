@@ -17,13 +17,13 @@ import Sidebar from './components/layout/Sidebar.jsx';
 
 export default function App() {
   return (
-    <div className="app">
-      <Header />
-        <div className="content-wrapper">
-    <Sidebar />
+  <div className="app-container">
+  <Header />
 
-      <main className="main-content">
-        <Routes>
+  <main className="layout">
+    <Sidebar />
+    <div className="content">
+  <Routes>
           <Route element={<GuestRoute />}>
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
@@ -39,11 +39,11 @@ export default function App() {
           </Route>
           <Route path="*" element={<NotFound />} />
         </Routes>
-      </main>
-        </div>
-
-      <Footer />
     </div>
+  </main>
+
+  <Footer />
+</div>
   );
 }
 

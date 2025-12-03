@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../contexts/AuthContext.jsx';
 import { useForm } from '../../hooks/useForm.js';
 import ErrorBox from '../common/ErrorBox.jsx';
+import * as profileService from '../../utils/profileService.js';
 
 export default function Register() {
   const { register } = useAuth();
@@ -11,20 +12,32 @@ export default function Register() {
 
   const { values, changeHandler, submitHandler } = useForm(
     { email: '', username: '', password: '', repeatPassword: '' },
-    async (values) => {
+    async (v) => {
       setError('');
 
-      if (!values.email || !values.username || !values.password) {
-        setError('All fields are required.');
-        return;
+      if (!v.email || !v.username || !v.password) {
+        return setError('All fields are required.');
       }
-      if (values.password !== values.repeatPassword) {
-        setError('Passwords do not match.');
-        return;
+
+      if (v.password !== v.repeatPassword) {
+        return setError('Passwords do not match.');
       }
 
       try {
-        await register(values.email, values.password, values.username);
+        const user = await register(v.email, v.password, v.username);
+
+        await profileService.create({
+          email: v.email,
+          displayName: v.username,
+          firstName: "",
+          lastName: "",
+          job: "",
+          age: "",
+          nationality: "",
+          bio: "",
+          avatarUrl: ""
+        });
+
         navigate('/');
       } catch (err) {
         setError(err.message);
@@ -40,51 +53,25 @@ export default function Register() {
       <form className="form" onSubmit={submitHandler}>
         <label>
           Email
-          <input
-            type="email"
-            name="email"
-            value={values.email}
-            onChange={changeHandler}
-            required
-          />
+          <input name="email" value={values.email} onChange={changeHandler} />
         </label>
 
         <label>
           Username
-          <input
-            type="text"
-            name="username"
-            value={values.username}
-            onChange={changeHandler}
-            required
-          />
+          <input name="username" value={values.username} onChange={changeHandler} />
         </label>
 
         <label>
           Password
-          <input
-            type="password"
-            name="password"
-            value={values.password}
-            onChange={changeHandler}
-            required
-          />
+          <input type="password" name="password" value={values.password} onChange={changeHandler} />
         </label>
 
         <label>
           Repeat Password
-          <input
-            type="password"
-            name="repeatPassword"
-            value={values.repeatPassword}
-            onChange={changeHandler}
-            required
-          />
+          <input type="password" name="repeatPassword" value={values.repeatPassword} onChange={changeHandler} />
         </label>
 
-        <button type="submit" className="btn btn-primary">
-          Register
-        </button>
+        <button className="btn btn-primary">Register</button>
       </form>
     </section>
   );

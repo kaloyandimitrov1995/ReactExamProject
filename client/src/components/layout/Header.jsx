@@ -19,7 +19,7 @@ export default function Header() {
     <header className="site-header">
       <div className="container header-inner">
         <Link to="/" className="logo">
-          Freelance News
+          Freelance News Board
         </Link>
 
         <nav className="nav">
@@ -39,7 +39,9 @@ export default function Header() {
           <div className="nav-right">
             {isAuthenticated ? (
               <>
-                <span className="nav-user">Hello, {user.username || user.email}</span>
+                <NavLink to={`/users/${user._id}`} className="nav-user nav-user-link">
+                 Hello, {user.username || user.email}
+                </NavLink>
                 <button className="btn btn-secondary" onClick={logoutHandler}>
                   Logout
                 </button>

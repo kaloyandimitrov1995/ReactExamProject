@@ -7,6 +7,7 @@ import Spinner from '../common/Spinner.jsx';
 import ErrorBox from '../common/ErrorBox.jsx';
 import CommentList from '../comments/CommentList.jsx';
 import CommentForm from '../comments/CommentForm.jsx';
+import * as likeService from '../../utils/likeService.js';
 
 export default function TopicDetails() {
   const { topicId } = useParams();
@@ -18,18 +19,26 @@ export default function TopicDetails() {
   const [likeCount, setLikeCount] = useState(0);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
+  const [likes, setLikes] = useState([]);
+  const [userLike, setUserLike] = useState(null);
 
   const isOwner = topic && topic._ownerId === user?._id;
 
   useEffect(() => {
     let isMounted = true;
 
-    Promise.all([topicService.getById(topicId), commentService.getByTopic(topicId)])
-      .then(([topicData, commentsData]) => {
-        if (!isMounted) return;
-        setTopic(topicData);
-        setComments(commentsData);
-      })
+    Promise.all([
+      topicService.getById(topicId),
+      commentService.getByTopic(topicId),
+      likeService.getLikesByTopic(topicId),
+      likeService.userLiked(topicId, user._id)
+    ])
+    .then(([topicData, commentsData, likesData, userLikedData]) => {
+      setTopic(topicData);
+      setComments(commentsData);
+      setLikes(likesData);
+      setUserLike(userLikedData);
+    })
       .catch((err) => {
         if (!isMounted) return;
         setError(err.message);
@@ -99,6 +108,28 @@ export default function TopicDetails() {
     );
   }
 
+  const toggleLike = async () => {
+  try {
+
+    if (!userLike) {
+      const created = await likeService.like({
+        topicId,
+      });
+      setLikes(prev => [...prev, created]);
+      setUserLike(created);
+    }
+
+
+    else {
+      await likeService.unlike(userLike._id);
+      setLikes(prev => prev.filter(l => l._id !== userLike._id));
+      setUserLike(null);
+    }
+  } catch (err) {
+    setError(err.message);
+  }
+};
+
   return (
     <section className="page">
       <article className="topic-details">
@@ -109,8 +140,8 @@ export default function TopicDetails() {
         <p className="topic-body">{topic.content}</p>
 
         <div className="topic-actions">
-          <button className="btn btn-secondary btn-small" onClick={likeHandler}>
-            👍 Like ({likeCount})
+          <button className="btn btn-secondary btn-small" onClick={toggleLike}>
+            {userLike ? "👎 Unlike" : "👍 Like"} ({likes.length})
           </button>
 
           {isOwner && (

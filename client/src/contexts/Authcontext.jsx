@@ -1,44 +1,69 @@
-import { createContext, useContext, useEffect, useState } from 'react';
-import * as api from '../utils/api.js';
+import { createContext, useContext, useEffect, useState } from "react";
+import * as api from "../utils/api.js";
+import { useProfile } from "./ProfileContext.jsx";
 
 const AuthContext = createContext();
-const AUTH_STORAGE_KEY = 'auth';
+const AUTH_KEY = "auth";
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
+  const { setUserId, refreshProfile, clearProfile } = useProfile();
 
   useEffect(() => {
-    const stored = localStorage.getItem(AUTH_STORAGE_KEY);
-    if (stored) {
-      try {
-        setUser(JSON.parse(stored));
-      } catch (err) {
-        console.error('Failed to parse auth from storage', err);
-        localStorage.removeItem(AUTH_STORAGE_KEY);
-      }
+    const stored = localStorage.getItem(AUTH_KEY);
+    if (!stored) return;
+
+    try {
+      const parsed = JSON.parse(stored);
+      setUser(parsed);
+      setUserId(parsed._id);
+    } catch {
+      localStorage.removeItem(AUTH_KEY);
     }
   }, []);
 
+
   const login = async (email, password) => {
-    const result = await api.post('/users/login', { email, password });
+    const result = await api.post("/users/login", { email, password });
+
     setUser(result);
-    localStorage.setItem(AUTH_STORAGE_KEY, JSON.stringify(result));
+    localStorage.setItem(AUTH_KEY, JSON.stringify(result));
+
+    setUserId(result._id);
+    await refreshProfile();
+
+    return result;
   };
 
+
   const register = async (email, password, username) => {
-    const result = await api.post('/users/register', { email, password, username });
+    const result = await api.post("/users/register", {
+      email,
+      password,
+      username,
+    });
+
     setUser(result);
-    localStorage.setItem(AUTH_STORAGE_KEY, JSON.stringify(result));
+    localStorage.setItem(AUTH_KEY, JSON.stringify(result));
+
+    setUserId(result._id);
+    await refreshProfile();
+
+    return result;
   };
+
 
   const logout = async () => {
     try {
-      await api.get('/users/logout');
+      await api.post("/users/logout"); 
     } catch (err) {
-      console.warn('Logout request failed, clearing session anyway.');
+      console.warn("Server logout failed, clearing client session anyway.");
     }
+
     setUser(null);
-    localStorage.removeItem(AUTH_STORAGE_KEY);
+    localStorage.removeItem(AUTH_KEY);
+    clearProfile();
+    setUserId(null);
   };
 
   const value = {
@@ -48,6 +73,7 @@ export const AuthProvider = ({ children }) => {
     register,
     logout,
   };
+
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 };
 

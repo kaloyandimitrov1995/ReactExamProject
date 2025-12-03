@@ -4,9 +4,10 @@ import { useAuth } from '../../contexts/AuthContext.jsx';
 import { useForm } from '../../hooks/useForm.js';
 import * as profileService from '../../utils/profileService.js';
 import Spinner from '../common/Spinner.jsx';
-import ErrorBox from '../common/ErrorBox.jsx';
+import { useProfile } from '../../contexts/ProfileContext.jsx';
 
 export default function UserEdit() {
+  const { refreshProfile } = useProfile();
   const { user } = useAuth();
   const navigate = useNavigate();
   const [profileId, setProfileId] = useState(null);
@@ -37,7 +38,12 @@ export default function UserEdit() {
           });
           setProfileId(created._id);
         }
-        navigate(`/users/${user._id}`);
+       await refreshProfile();
+
+
+       setTimeout(() => {
+         navigate(`/users/${user._id}`);
+       }, 250);
       } catch (err) {
         setError(err.message);
       }
@@ -91,7 +97,6 @@ export default function UserEdit() {
   return (
     <section className="page page-narrow">
       <h2>Edit Profile</h2>
-      <ErrorBox message={error} />
 
       <form className="form" onSubmit={submitHandler}>
       <label>

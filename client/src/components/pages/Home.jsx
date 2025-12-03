@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import * as topicService from '../../utils/topicService.js';
 import TopicCard from '../topics/TopicCard.jsx';
 import Spinner from '../common/Spinner.jsx';
-import ErrorBox from '../common/ErrorBox.jsx';
+
 
 export default function Home() {
   const [topics, setTopics] = useState([]);
@@ -38,10 +38,7 @@ export default function Home() {
       <p className="page-subtitle">
         Share your freelance news, projects and random thoughts. Other users can read and comment.
       </p>
-
       {loading && <Spinner />}
-      <ErrorBox message={error} />
-
       <div className="topics-grid">
         {topics.map((t) => (
           <TopicCard key={t._id} topic={t} />
