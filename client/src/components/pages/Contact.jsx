@@ -1,6 +1,6 @@
 export default function Contact() {
   return (
-    <section>
+    <section className="page page-narrow">
       <h2>Contact Us</h2>
       <p>
         This is a demo project for a SoftUni React exam. If this were a real site, you could reach us

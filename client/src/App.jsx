@@ -1,6 +1,8 @@
 import { Routes, Route } from 'react-router-dom';
 import Header from './components/layout/Header.jsx';
 import Footer from './components/layout/Footer.jsx';
+import PrivateRoute from './components/guards/PrivateRoute.jsx';
+import GuestRoute from './components/guards/GuestRoute.jsx';
 import Home from './components/pages/Home.jsx';
 import Login from './components/pages/Login.jsx';
 import Register from './components/pages/Register.jsx';
@@ -18,25 +20,27 @@ export default function App() {
       <Header />
 
       <main className="main-content">
-    <Routes>
-      <Route path="/login" element={<Login />} />
-      <Route path="/register" element={<Register />} />
-
-      <Route path="/contact" element={<Contact />} />
-      <Route path="/faq" element={<FAQ />} />
-
-
-      <Route path="/" element={<Home />} />
-      <Route path="/topics/create" element={<TopicCreate />} />
-      <Route path="/topics/:topicId" element={<TopicDetails />} />
-      <Route path="/profile/edit" element={<UserEdit />} />
-      <Route path="/users/:userId" element={<UserProfile />} />
-
-      <Route path="*" element={<NotFound />} />
-    </Routes>
+        <Routes>
+          <Route element={<GuestRoute />}>
+            <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
+          </Route>
+          <Route path="/contact" element={<Contact />} />
+          <Route path="/faq" element={<FAQ />} />
+          <Route element={<PrivateRoute />}>
+            <Route path="/" element={<Home />} />
+            <Route path="/topics/create" element={<TopicCreate />} />
+            <Route path="/topics/:topicId" element={<TopicDetails />} />
+            <Route path="/profile/edit" element={<UserEdit />} />
+            <Route path="/users/:userId" element={<UserProfile />} />
+          </Route>
+          <Route path="*" element={<NotFound />} />
+        </Routes>
       </main>
 
       <Footer />
     </div>
   );
 }
+
+

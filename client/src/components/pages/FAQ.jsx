@@ -1,6 +1,6 @@
 export default function FAQ() {
   return (
-    <section>
+    <section className="page page-narrow">
       <h2>FAQ</h2>
 
       <h4>What is this site?</h4>
