@@ -14,7 +14,16 @@ export default function UserEdit() {
   const [error, setError] = useState('');
 
   const { values, changeHandler, submitHandler, setValues } = useForm(
-    { displayName: '', bio: '' },
+      {
+    displayName: '',
+    bio: '',
+    firstName: '',
+    lastName: '',
+    job: '',
+    age: '',
+    nationality: '',
+    avatarUrl: ''
+      },
     async (values) => {
       setError('');
 
@@ -42,13 +51,20 @@ export default function UserEdit() {
       .getMyProfile(user._id)
       .then((profile) => {
         if (!isMounted) return;
-        if (profile) {
-          setProfileId(profile._id);
-          setValues({
-            displayName: profile.displayName || '',
-            bio: profile.bio || '',
-          });
-        }
+         if (profile) {
+           setProfileId(profile._id);
+
+           setValues({
+             displayName: profile.displayName || '',
+             bio: profile.bio || '',
+             firstName: profile.firstName || '',
+             lastName: profile.lastName || '',
+             job: profile.job || '',
+             age: profile.age || '',
+             nationality: profile.nationality || '',
+             avatarUrl: profile.avatarUrl || ''
+           });
+         }
       })
       .catch((err) => {
         if (!isMounted) return;
@@ -78,20 +94,35 @@ export default function UserEdit() {
       <ErrorBox message={error} />
 
       <form className="form" onSubmit={submitHandler}>
-        <label>
-          Display Name
-          <input
-            type="text"
-            name="displayName"
-            value={values.displayName}
-            onChange={changeHandler}
-          />
-        </label>
+      <label>
+        First Name
+       <input name="firstName" value={values.firstName} onChange={changeHandler} />
+      </label>
 
-        <label>
-          Short Bio
-          <textarea name="bio" rows="4" value={values.bio} onChange={changeHandler} />
-        </label>
+      <label>
+        Last Name
+        <input name="lastName" value={values.lastName} onChange={changeHandler} />
+      </label>
+
+      <label>
+        Job
+        <input name="job" value={values.job} onChange={changeHandler} />
+      </label>
+
+      <label>
+        Age
+        <input name="age" value={values.age} onChange={changeHandler} />
+      </label>
+
+      <label>
+        Nationality
+        <input name="nationality" value={values.nationality} onChange={changeHandler} />
+      </label>
+
+      <label>
+        Profile Photo URL
+        <input name="avatarUrl" value={values.avatarUrl} onChange={changeHandler} />
+      </label>
 
         <button type="submit" className="btn btn-primary">
           Save

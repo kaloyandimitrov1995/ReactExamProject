@@ -10,9 +10,11 @@ export default function UserProfile() {
   const { userId } = useParams();
   const [profile, setProfile] = useState(null);
   const [topics, setTopics] = useState([]);
-  const [likeCount, setLikeCount] = useState(0); // simple like on profile
+  const [likeCount, setLikeCount] = useState(0); 
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
+  const DEFAULT_AVATAR =
+  'https://i.ibb.co/6sFq5Xw/default-avatar.png';
 
   useEffect(() => {
     let isMounted = true;
@@ -45,7 +47,7 @@ export default function UserProfile() {
   }, [userId]);
 
   const likeProfileHandler = () => {
-    setLikeCount((c) => c + 1); // again: client-side "like" just to show interaction
+    setLikeCount((c) => c + 1); 
   };
 
   if (loading) {
@@ -61,9 +63,19 @@ export default function UserProfile() {
       <ErrorBox message={error} />
 
       <article className="user-profile">
-        <h2>{profile?.displayName || 'Freelancer'}</h2>
+             <img
+          className="sidebar-avatar"
+          src={profile?.avatarUrl || DEFAULT_AVATAR}
+        />
+
+        <h2>{profile?.firstName} {profile?.lastName}</h2>
+
+        <p><strong>Job:</strong> {profile?.job || '—'}</p>
+        <p><strong>Age:</strong> {profile?.age || '—'}</p>
+        <p><strong>Nationality:</strong> {profile?.nationality || '—'}</p>
+
         <p className="user-email">{profile?.email}</p>
-        <p className="user-bio">{profile?.bio || 'This user has not written a bio yet.'}</p>
+        <p className="user-bio">{profile?.bio}</p>
 
         <button className="btn btn-secondary btn-small" onClick={likeProfileHandler}>
           👍 Like profile ({likeCount})

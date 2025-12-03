@@ -13,11 +13,14 @@ import TopicDetails from './components/pages/TopicDetails.jsx';
 import UserEdit from './components/pages/UserEdit.jsx';
 import UserProfile from './components/pages/UserProfile.jsx';
 import NotFound from './components/pages/NotFound.jsx';
+import Sidebar from './components/layout/Sidebar.jsx';
 
 export default function App() {
   return (
     <div className="app">
       <Header />
+        <div className="content-wrapper">
+    <Sidebar />
 
       <main className="main-content">
         <Routes>
@@ -37,6 +40,7 @@ export default function App() {
           <Route path="*" element={<NotFound />} />
         </Routes>
       </main>
+        </div>
 
       <Footer />
     </div>
