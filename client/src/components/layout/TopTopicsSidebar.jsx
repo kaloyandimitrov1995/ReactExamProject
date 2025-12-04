@@ -40,7 +40,7 @@ export default function TopTopicsSidebar() {
   return (
     <aside className="right-sidebar">
       <div className="right-card">
-        <h3>🔥 Top 10 Topics</h3>
+        <h3>🔥 Top Topics 🔥</h3>
 
         {topTopics.map((t) => (
           <Link key={t._id} to={`/topics/${t._id}`} className="top-topic-item">

@@ -7,21 +7,25 @@ const AUTH_KEY = "auth";
 
 export const AuthProvider = ({ children }) => {
   const [user, setUserState] = useState(null);
-  const { setUser, refreshProfile } = useProfile();
+
+  const { setUserId, refreshProfile, clearProfile } = useProfile();
 
 
-  useEffect(() => {
-    const stored = localStorage.getItem(AUTH_KEY);
-    if (!stored) return;
+useEffect(() => {
+  const stored = localStorage.getItem(AUTH_KEY);
+  if (!stored) return;
 
-    try {
-      const parsed = JSON.parse(stored);
-      setUserState(parsed);
-      setUser(parsed._id);      
-    } catch {
-      localStorage.removeItem(AUTH_KEY);
-    }
-  }, []);
+  try {
+    const parsed = JSON.parse(stored);
+    setUserState(parsed);
+
+    document.body.classList.add("auth"); 
+
+    setUserId(parsed._id);
+  } catch {
+    localStorage.removeItem(AUTH_KEY);
+  }
+}, []);
 
 
   const login = async (email, password) => {
@@ -30,8 +34,8 @@ export const AuthProvider = ({ children }) => {
     setUserState(result);
     localStorage.setItem(AUTH_KEY, JSON.stringify(result));
 
-    setUser(result._id);      
-    await refreshProfile();    
+    setUserId(result._id);
+    await refreshProfile();
 
     return result;
   };
@@ -47,8 +51,8 @@ export const AuthProvider = ({ children }) => {
     setUserState(result);
     localStorage.setItem(AUTH_KEY, JSON.stringify(result));
 
-    setUser(result._id);       
-    await refreshProfile();     
+    setUserId(result._id);
+    await refreshProfile();
 
     return result;
   };
@@ -57,12 +61,14 @@ export const AuthProvider = ({ children }) => {
     try {
       await api.post("/users/logout");
     } catch {
-      console.warn("Logout request failed — clearing local session anyway.");
+      console.warn("Logout request failed — clearing session anyway.");
     }
 
     setUserState(null);
     localStorage.removeItem(AUTH_KEY);
-    setUser(null);        
+
+    clearProfile();
+    setUserId(null);
   };
 
   return (

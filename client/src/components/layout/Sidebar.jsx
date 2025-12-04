@@ -2,8 +2,7 @@ import { Link } from 'react-router-dom';
 import { useAuth } from '../../contexts/AuthContext.jsx';
 import { useProfile } from '../../contexts/ProfileContext.jsx';
 
-const DEFAULT_AVATAR =
-  'https://i.ibb.co/6sFq5Xw/default-avatar.png';
+const DEFAULT_AVATAR = "https://i.stack.imgur.com/l60Hf.png";
 
 export default function Sidebar() {
   const { user } = useAuth();

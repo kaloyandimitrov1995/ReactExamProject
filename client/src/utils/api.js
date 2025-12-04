@@ -19,8 +19,11 @@ async function request(method, url, data) {
 
   const token = getToken();
   if (token) {
-    options.headers['X-Authorization'] = token;
-  }
+  options.headers["X-Authorization"] = token;
+} else {
+  delete options.headers["X-Authorization"];
+}
+
 
   if (data !== undefined) {
     options.headers['Content-Type'] = 'application/json';

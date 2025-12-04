@@ -3,15 +3,14 @@ export default function Contact() {
     <section className="page page-narrow">
       <h2>Contact Us</h2>
       <p>
-        This is a demo project for a SoftUni React exam. If this were a real site, you could reach us
+        This is a demo project for a SoftUni React exam. If this were a real site, you could reach me
         at:
       </p>
       <ul>
-        <li>Email: support@freelancenews.fake</li>
-        <li>Discord: Freelance News Community</li>
-        <li>Address: Somewhere on the Internet</li>
+        <li>Email: luckykaloyan@gmail.com</li>
+        <li>Discord: luckykaloyan</li>
+        <li>Address: At Home</li>
       </ul>
-      <p>Form not implemented on purpose – it’s just a static page for the exam requirements.</p>
     </section>
   );
 }

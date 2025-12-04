@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import * as profileService from "../../utils/profileService.js";
 import * as topicService from "../../utils/topicService.js";
-import * as profileLikeService from "../../utils/profileLikeService.js";
 import TopicCard from "../topics/TopicCard.jsx";
 import Spinner from "../common/Spinner.jsx";
 import { useAuth } from "../../contexts/AuthContext.jsx";
@@ -16,8 +15,6 @@ export default function UserProfile() {
   const [profile, setProfile] = useState(null);
   const [topics, setTopics] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [profileLikes, setProfileLikes] = useState([]);
-  const [userProfileLike, setUserProfileLike] = useState(null);
   const [error, setError] = useState("");
 
   const isSelf = userId === user._id;
@@ -39,15 +36,9 @@ export default function UserProfile() {
       try {
         const [allTopics, allLikes, myLike] = await Promise.all([
           topicService.getAll(),
-          profileLikeService.getLikesForProfile(userId),
-          profileLikeService.userLikedProfile(userId, user._id),
         ]);
-
         if (!active) return;
-
         setTopics(allTopics.filter((t) => t._ownerId === userId));
-        setProfileLikes(allLikes);
-        setUserProfileLike(myLike);
       } catch (err) {
         if (active) setError(err.message);
       }
@@ -73,7 +64,7 @@ export default function UserProfile() {
   if (!profile) {
     return (
       <section className="page">
-        <h2>User profile not found.</h2>
+        <h2>This is a Dummy User, please click Edit Profile!</h2>
       </section>
     );
   }
@@ -87,7 +78,7 @@ export default function UserProfile() {
         />
 
         <h2>
-          {profile.firstName || "Unnamed"} {profile.lastName || ""}
+          {profile.firstName || "Annonymous"} {profile.lastName || ""}
         </h2>
 
         <p>
@@ -103,33 +94,7 @@ export default function UserProfile() {
         <p className="user-email">{profile.email}</p>
         <p className="user-bio">{profile.bio}</p>
 
-        {userId !== user._id && (
-          <button
-            className="btn btn-secondary btn-small"
-            onClick={async () => {
-              try {
-                if (!userProfileLike) {
-                  const created = await profileLikeService.like({
-                    profileUserId: userId,
-                  });
-                  setProfileLikes((prev) => [...prev, created]);
-                  setUserProfileLike(created);
-                } else {
-                  await profileLikeService.unlike(userProfileLike._id);
-                  setProfileLikes((prev) =>
-                    prev.filter((l) => l._id !== userProfileLike._id)
-                  );
-                  setUserProfileLike(null);
-                }
-              } catch (err) {
-                console.error(err.message);
-              }
-            }}
-          >
-            {userProfileLike ? "👎 Unlike Profile" : "👍 Like Profile"} (
-            {profileLikes.length})
-          </button>
-        )}
+
       </article>
 
       <section>
