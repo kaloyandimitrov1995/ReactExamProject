@@ -6,8 +6,9 @@ const AuthContext = createContext();
 const AUTH_KEY = "auth";
 
 export const AuthProvider = ({ children }) => {
-  const [user, setUser] = useState(null);
-  const { setUserId, refreshProfile, clearProfile } = useProfile();
+  const [user, setUserState] = useState(null);
+  const { setUser, refreshProfile } = useProfile();
+
 
   useEffect(() => {
     const stored = localStorage.getItem(AUTH_KEY);
@@ -15,8 +16,8 @@ export const AuthProvider = ({ children }) => {
 
     try {
       const parsed = JSON.parse(stored);
-      setUser(parsed);
-      setUserId(parsed._id);
+      setUserState(parsed);
+      setUser(parsed._id);      
     } catch {
       localStorage.removeItem(AUTH_KEY);
     }
@@ -26,11 +27,11 @@ export const AuthProvider = ({ children }) => {
   const login = async (email, password) => {
     const result = await api.post("/users/login", { email, password });
 
-    setUser(result);
+    setUserState(result);
     localStorage.setItem(AUTH_KEY, JSON.stringify(result));
 
-    setUserId(result._id);
-    await refreshProfile();
+    setUser(result._id);      
+    await refreshProfile();    
 
     return result;
   };
@@ -43,38 +44,40 @@ export const AuthProvider = ({ children }) => {
       username,
     });
 
-    setUser(result);
+    setUserState(result);
     localStorage.setItem(AUTH_KEY, JSON.stringify(result));
 
-    setUserId(result._id);
-    await refreshProfile();
+    setUser(result._id);       
+    await refreshProfile();     
 
     return result;
   };
 
-
   const logout = async () => {
     try {
-      await api.post("/users/logout"); 
-    } catch (err) {
-      console.warn("Server logout failed, clearing client session anyway.");
+      await api.post("/users/logout");
+    } catch {
+      console.warn("Logout request failed — clearing local session anyway.");
     }
 
-    setUser(null);
+    setUserState(null);
     localStorage.removeItem(AUTH_KEY);
-    clearProfile();
-    setUserId(null);
+    setUser(null);        
   };
 
-  const value = {
-    user,
-    isAuthenticated: !!user,
-    login,
-    register,
-    logout,
-  };
-
-  return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
+  return (
+    <AuthContext.Provider
+      value={{
+        user,
+        isAuthenticated: !!user,
+        login,
+        register,
+        logout,
+      }}
+    >
+      {children}
+    </AuthContext.Provider>
+  );
 };
 
 export const useAuth = () => useContext(AuthContext);

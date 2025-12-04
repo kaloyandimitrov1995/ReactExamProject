@@ -14,6 +14,8 @@ import UserEdit from './components/pages/UserEdit.jsx';
 import UserProfile from './components/pages/UserProfile.jsx';
 import NotFound from './components/pages/NotFound.jsx';
 import Sidebar from './components/layout/Sidebar.jsx';
+import TopTopicsSidebar from './components/layout/TopTopicsSidebar.jsx';
+
 
 export default function App() {
   return (
@@ -40,6 +42,7 @@ export default function App() {
           <Route path="*" element={<NotFound />} />
         </Routes>
     </div>
+    <TopTopicsSidebar /> 
   </main>
 
   <Footer />

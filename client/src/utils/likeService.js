@@ -14,3 +14,4 @@ export const userLiked = async (topicId, userId) => {
 
 export const like = (data) => api.post(baseUrl, data);
 export const unlike = (id) => api.del(`${baseUrl}/${id}`);
+export const getAllLikes = () => api.get("/data/likes");

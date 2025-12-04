@@ -8,12 +8,13 @@ import ErrorBox from '../common/ErrorBox.jsx';
 import CommentList from '../comments/CommentList.jsx';
 import CommentForm from '../comments/CommentForm.jsx';
 import * as likeService from '../../utils/likeService.js';
+import { useLikes } from "../../contexts/LikeContext.jsx";
 
 export default function TopicDetails() {
   const { topicId } = useParams();
   const { user } = useAuth();
   const navigate = useNavigate();
-
+  const { notifyLikesChanged } = useLikes();
   const [topic, setTopic] = useState(null);
   const [comments, setComments] = useState([]);
   const [likeCount, setLikeCount] = useState(0);
@@ -125,6 +126,8 @@ export default function TopicDetails() {
       setLikes(prev => prev.filter(l => l._id !== userLike._id));
       setUserLike(null);
     }
+    
+    notifyLikesChanged();
   } catch (err) {
     setError(err.message);
   }
