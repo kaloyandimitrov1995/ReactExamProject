@@ -17,3 +17,9 @@ export const getByUserId = async (userId) => {
 export const create = (profileData) => api.post(baseUrl, profileData);
 
 export const update = (id, profileData) => api.put(`${baseUrl}/${id}`, profileData);
+
+export async function usernameTaken(username) {
+  const query = encodeURIComponent(`displayName="${username}"`);
+  const result = await api.get(`/data/profiles?where=${query}`);
+  return result.length > 0;
+}

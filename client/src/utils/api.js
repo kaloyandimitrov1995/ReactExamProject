@@ -1,8 +1,8 @@
-const BASE_URL = 'http://localhost:3030';
+const BASE_URL = "http://localhost:3030";
 
 function getToken() {
   try {
-    const raw = localStorage.getItem('auth');
+    const raw = localStorage.getItem("auth");
     if (!raw) return null;
     const data = JSON.parse(raw);
     return data.accessToken;
@@ -12,21 +12,20 @@ function getToken() {
 }
 
 async function request(method, url, data) {
+  const token = getToken();  
+
   const options = {
     method,
     headers: {},
   };
 
-  const token = getToken();
+  // Always set the header if token exists
   if (token) {
-  options.headers["X-Authorization"] = token;
-} else {
-  delete options.headers["X-Authorization"];
-}
-
+    options.headers["X-Authorization"] = token;
+  }
 
   if (data !== undefined) {
-    options.headers['Content-Type'] = 'application/json';
+    options.headers["Content-Type"] = "application/json";
     options.body = JSON.stringify(data);
   }
 
@@ -37,24 +36,22 @@ async function request(method, url, data) {
   }
 
   let result;
+
   try {
     result = await response.json();
   } catch (err) {
-    if (response.ok) {
-      return {};
-    }
+    if (response.ok) return {};
     throw err;
   }
 
   if (!response.ok) {
-    const message = result.message || 'Request failed';
-    throw new Error(message);
+    throw new Error(result.message || "Request failed");
   }
 
   return result;
 }
 
-export const get = request.bind(null, 'GET');
-export const post = request.bind(null, 'POST');
-export const put = request.bind(null, 'PUT');
-export const del = request.bind(null, 'DELETE');
+export const get = (url) => request("GET", url);
+export const post = (url, data) => request("POST", url, data);
+export const put = (url, data) => request("PUT", url, data);
+export const del = (url) => request("DELETE", url);

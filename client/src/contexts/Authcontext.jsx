@@ -11,21 +11,18 @@ export const AuthProvider = ({ children }) => {
   const { setUserId, refreshProfile, clearProfile } = useProfile();
 
 
-useEffect(() => {
-  const stored = localStorage.getItem(AUTH_KEY);
-  if (!stored) return;
+  useEffect(() => {
+    const stored = localStorage.getItem(AUTH_KEY);
+    if (!stored) return;
 
-  try {
-    const parsed = JSON.parse(stored);
-    setUserState(parsed);
-
-    document.body.classList.add("auth"); 
-
-    setUserId(parsed._id);
-  } catch {
-    localStorage.removeItem(AUTH_KEY);
-  }
-}, []);
+    try {
+      const parsed = JSON.parse(stored);
+      setUserState(parsed);
+      setUserId(parsed._id);
+    } catch {
+      localStorage.removeItem(AUTH_KEY);
+    }
+  }, []);
 
 
   const login = async (email, password) => {
@@ -56,6 +53,7 @@ useEffect(() => {
 
     return result;
   };
+
 
   const logout = async () => {
     try {

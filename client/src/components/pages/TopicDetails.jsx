@@ -9,6 +9,7 @@ import CommentList from '../comments/CommentList.jsx';
 import CommentForm from '../comments/CommentForm.jsx';
 import * as likeService from '../../utils/likeService.js';
 import { useLikes } from "../../contexts/LikeContext.jsx";
+import { useTopicUpdate } from "../../contexts/TopicUpdateContext.jsx";
 
 export default function TopicDetails() {
   const { topicId } = useParams();
@@ -22,6 +23,8 @@ export default function TopicDetails() {
   const [error, setError] = useState('');
   const [likes, setLikes] = useState([]);
   const [userLike, setUserLike] = useState(null);
+  const { notifyTopicsChanged } = useTopicUpdate();
+
 
   const isOwner = topic && topic._ownerId === user?._id;
 
@@ -60,6 +63,7 @@ export default function TopicDetails() {
 
     try {
       await topicService.remove(topicId);
+      notifyTopicsChanged();
       navigate('/');
     } catch (err) {
       setError(err.message);

@@ -2,17 +2,21 @@ import { useEffect, useState } from "react";
 import * as topicService from "../../utils/topicService.js";
 import * as likeService from "../../utils/likeService.js";
 import { useLikes } from "../../contexts/LikeContext.jsx";
+import { useTopicUpdate } from "../../contexts/TopicUpdateContext.jsx";
+import { useAuth } from "../../contexts/AuthContext.jsx";
 import { Link } from "react-router-dom";
 
 export default function TopTopicsSidebar() {
   const [topTopics, setTopTopics] = useState([]);
   const { updateSignal } = useLikes();
+  const { topicSignal } = useTopicUpdate();
+  const { user } = useAuth();
 
- useEffect(() => {
+  useEffect(() => {
     async function loadTopTopics() {
       try {
-        const topics = await topicService.getAll(); 
-        const likes = await likeService.getAllLikes(); 
+        const topics = await topicService.getAll();
+        const likes = await likeService.getAllLikes();
 
         const likeMap = {};
         likes.forEach((l) => {
@@ -35,12 +39,12 @@ export default function TopTopicsSidebar() {
     }
 
     loadTopTopics();
-  }, [updateSignal]);
+  }, [updateSignal, topicSignal, user]); 
 
   return (
     <aside className="right-sidebar">
       <div className="right-card">
-        <h3>🔥 Top Topics 🔥</h3>
+        <h3>🔥 Top 10 Topics</h3>
 
         {topTopics.map((t) => (
           <Link key={t._id} to={`/topics/${t._id}`} className="top-topic-item">

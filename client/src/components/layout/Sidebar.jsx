@@ -18,9 +18,10 @@ export default function Sidebar() {
           alt="avatar"
           className="sidebar-avatar"
         />
-
-        <h3>{profile?.firstName} {profile?.lastName}</h3>
-
+        
+        <h3>User Info</h3>
+        <p className="sidebar-field"><strong>First Name:</strong> {profile?.firstName || '—'}</p>
+        <p className="sidebar-field"><strong>Last Name:</strong> {profile?.lastName || '—'}</p>
         <p className="sidebar-field"><strong>Job:</strong> {profile?.job || '—'}</p>
         <p className="sidebar-field"><strong>Age:</strong> {profile?.age || '—'}</p>
         <p className="sidebar-field"><strong>Nationality:</strong> {profile?.nationality || '—'}</p>

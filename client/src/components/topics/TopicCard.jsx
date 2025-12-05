@@ -3,6 +3,9 @@ import { Link } from 'react-router-dom';
 export default function TopicCard({ topic }) {
   return (
     <article className="topic-card">
+     <span className={`topic-tag ${topic.category || "news"}`}>
+       {(topic.category || "news").toUpperCase()}
+     </span>
       <h3>{topic.title}</h3>
       <p className="topic-meta">
         by <Link to={`/users/${topic._ownerId}`}>{topic.authorName || 'Anonymous'}</Link>

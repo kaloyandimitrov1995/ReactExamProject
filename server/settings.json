@@ -28,38 +28,74 @@
             "_ownerId": "35c62d76-8152-4626-8712-eeb96381bea8",
             "title": "What’s Your Best Productivity Trick?",
             "content": "I am experimenting with new productivity systems this year. What hacks or tools have helped you stay focused daily?",
-            "authorName": "Peter"
+            "authorName": "Peter",
+            "category": "news"
         },
         "topic-002": {
             "_ownerId": "60f0cf0b-34b0-4abd-9769-8c42f830dffc",
             "title": "How Do You Learn New Technologies?",
             "content": "When starting a new language or framework, what is your preferred learning method?",
-            "authorName": "Admin"
+            "authorName": "Admin",
+            "category": "news"
         },
         "topic-003": {
             "_ownerId": "35c62d76-8152-4626-8712-eeb96381bea8",
             "title": "Share Your Latest Project!",
             "content": "I'm curious to see what everyone is building. Share your current project.",
-            "authorName": "Peter"
+            "authorName": "Peter",
+            "category": "job"
         },
         "topic-004": {
             "_ownerId": "60f0cf0b-34b0-4abd-9769-8c42f830dffc",
             "title": "Do You Use AI Tools in Development?",
             "content": "Do you use AI assistants like ChatGPT or Copilot in your workflow?",
-            "authorName": "Admin"
+            "authorName": "Admin",
+            "category": "story"
         },
         "topic-005": {
             "_ownerId": "35c62d76-8152-4626-8712-eeb96381bea8",
             "title": "How Do You Stay Motivated Long-Term?",
             "content": "Software development is a marathon. What keeps you motivated?",
-            "authorName": "Peter"
+            "authorName": "Peter",
+            "category": "story"
         }
     },
 
     "comments": {},
     "likes": {},
-    "profiles": {}
-},
+    "profiles": {
+  "peter-profile-id": {
+    "_ownerId": "35c62d76-8152-4626-8712-eeb96381bea8",
+    "email": "peter@abv.bg",
+    "firstName": "Peter",
+    "lastName": "Griffin",
+    "job": "Programmer",
+    "age": "27",
+    "nationality": "Bulgaria",
+    "avatarUrl": "https://m.media-amazon.com/images/I/41cuQnJf5kL._AC_UF1000,1000_QL80_.jpg"
+  },
+  "george-profile-id": {
+    "_ownerId": "847ec027-f659-4086-8032-5173e2f9c93a",
+    "email": "george@abv.bg",
+    "firstName": "Saint ",
+    "lastName": "George",
+    "job": "Programmer",
+    "age": "27",
+    "nationality": "Bulgaria",
+    "avatarUrl": "https://t3.ftcdn.net/jpg/01/75/30/44/360_F_175304476_02VeTC9gUanGcIYkJeO5fMHJX9O73Uou.jpg"
+  },
+  "admin-profile-id": {
+    "_ownerId": "60f0cf0b-34b0-4abd-9769-8c42f830dffc",
+    "email": "admin@abv.bg",
+    "firstName": "The ",
+    "lastName": "Admin",
+    "job": "Programmer",
+    "age": "27",
+    "nationality": "Bulgaria",
+    "avatarUrl": "https://images.freeimages.com/fic/images/icons/2526/bloggers/256/admin.png"
+  }
+}
 
+},
     "rules": {}
 }

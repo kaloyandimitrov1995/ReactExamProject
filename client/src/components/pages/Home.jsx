@@ -1,49 +1,86 @@
-import { useEffect, useState } from 'react';
+import { useState, useEffect } from "react";
 import * as topicService from '../../utils/topicService.js';
 import TopicCard from '../topics/TopicCard.jsx';
-import Spinner from '../common/Spinner.jsx';
+import { useTopicUpdate } from "../../contexts/TopicUpdateContext.jsx";
+
 
 
 export default function Home() {
   const [topics, setTopics] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
+  const { topicsChanged } = useTopicUpdate();
+  const [filters, setFilters] = useState({
+    news: false,
+    job: false,
+    story: false,
+  });
 
-  useEffect(() => {
-    let isMounted = true;
+  const selected = Object.keys(filters).filter(k => filters[k]);
 
-    topicService
-      .getAll()
-      .then((data) => {
-        if (!isMounted) return;
-        setTopics(data);
-      })
-      .catch((err) => {
-        if (!isMounted) return;
-        setError(err.message);
-      })
-      .finally(() => {
-        if (!isMounted) return;
-        setLoading(false);
-      });
+  const filteredTopics =
+    selected.length === 0
+      ? topics
+      : topics.filter(t => selected.includes(t.category));
 
-    return () => {
-      isMounted = false;
-    };
-  }, []);
+  function toggleFilter(category) {
+    setFilters(prev => ({
+      ...prev,
+      [category]: !prev[category],
+    }));
+  }
+
+ useEffect(() => {
+  setLoading(true);
+
+  topicService
+    .getAll()
+    .then(setTopics)
+    .catch(err => setError(err.message))
+    .finally(() => setLoading(false));
+}, [topicsChanged]);
 
   return (
     <section className="page">
       <h2>Latest Topics</h2>
-      <p className="page-subtitle">
-        Share your freelance news, projects and random thoughts. Other users can read and comment.
-      </p>
-      {loading && <Spinner />}
+
+      <div className="topic-filters">
+        <label>
+          <input
+            type="checkbox"
+            checked={filters.news}
+            onChange={() => toggleFilter("news")}
+          />
+          <span className="topic-tag news">NEWS</span>
+        </label>
+
+        <label>
+          <input
+            type="checkbox"
+            checked={filters.job}
+            onChange={() => toggleFilter("job")}
+          />
+          <span className="topic-tag job">JOB OFFER</span>
+        </label>
+
+        <label>
+          <input
+            type="checkbox"
+            checked={filters.story}
+            onChange={() => toggleFilter("story")}
+          />
+          <span className="topic-tag story">STORY</span>
+        </label>
+      </div>
+
       <div className="topics-grid">
-        {topics.map((t) => (
+        {filteredTopics.map(t => (
           <TopicCard key={t._id} topic={t} />
         ))}
-        {!loading && !error && topics.length === 0 && <p>No topics yet. Create the first one!</p>}
+
+        {!loading && filteredTopics.length === 0 && (
+          <p>No topics match your filters.</p>
+        )}
       </div>
     </section>
   );
