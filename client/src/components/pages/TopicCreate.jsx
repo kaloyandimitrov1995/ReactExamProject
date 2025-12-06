@@ -51,6 +51,7 @@ export default function TopicCreate() {
           content: values.content.trim(),
           category: values.category,
           authorName: user.username || user.email,
+          createdAt: new Date().toISOString(),
         });
         notifyTopicsChanged();
         navigate(`/topics/${newTopic._id}`);

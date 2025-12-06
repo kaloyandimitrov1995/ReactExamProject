@@ -14,6 +14,9 @@ export default function TopicCard({ topic }) {
         {topic.content?.slice(0, 120)}
         {topic.content && topic.content.length > 120 ? '...' : ''}
       </p>
+      <p className="topic-meta">
+        Published: {new Date(topic.createdAt).toLocaleDateString()}
+      </p>
       <Link to={`/topics/${topic._id}`} className="btn btn-primary btn-small">
         Open Topic
       </Link>

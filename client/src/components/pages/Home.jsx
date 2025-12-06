@@ -35,7 +35,12 @@ export default function Home() {
 
   topicService
     .getAll()
-    .then(setTopics)
+    .then((data) => {
+      const sorted = [...data].sort((a, b) => {
+        return new Date(b.createdAt) - new Date(a.createdAt);
+      });
+      setTopics(sorted);
+    })
     .catch(err => setError(err.message))
     .finally(() => setLoading(false));
 }, [topicsChanged]);
