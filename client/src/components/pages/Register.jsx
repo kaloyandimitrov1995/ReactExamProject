@@ -127,7 +127,7 @@ export default function Register() {
           />
         </label>
 
-        <button className="btn btn-primary">Register</button>
+        <button type="submit" className="btn btn-primary">Register</button>
       </form>
     </section>
   );
