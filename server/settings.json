@@ -26,16 +26,16 @@
     "topics": {
         "topic-001": {
             "_ownerId": "35c62d76-8152-4626-8712-eeb96381bea8",
-            "title": "What’s Your Best Productivity Trick?",
-            "content": "I am experimenting with new productivity systems this year. What hacks or tools have helped you stay focused daily?",
+            "title": "React / React Server Components — Critical RCE Vulnerability (React2Shell / CVE-2025-55182)",
+            "content": "The vulnerability allows unauthenticated remote-code execution (RCE) via a bug in how React deserialises payloads for Server Components. Affected versions: React Server-Component packages 19.0, 19.1, 19.1.1, 19.2.0 (react-server-dom-webpack / parcel / turbopack). Patched versions released: 19.0.1, 19.1.2, 19.2.1. Risk: Even apps that don’t explicitly define Server Functions may be vulnerable if they support Server Components. ",
             "authorName": "Peter",
             "category": "news",
             "createdAt": "2025-12-03T00:00:00.000Z"
         },
         "topic-002": {
             "_ownerId": "60f0cf0b-34b0-4abd-9769-8c42f830dffc",
-            "title": "How Do You Learn New Technologies?",
-            "content": "When starting a new language or framework, what is your preferred learning method?",
+            "title": "Soon I have to finish this react demo project for my softUni course?",
+            "content": "The time is up!",
             "authorName": "Admin",
             "category": "news",
             "createdAt": "2025-12-04T00:00:00.000Z"
@@ -43,23 +43,23 @@
         "topic-003": {
             "_ownerId": "35c62d76-8152-4626-8712-eeb96381bea8",
             "title": "Share Your Latest Project!",
-            "content": "I'm curious to see what everyone is building. Share your current project.",
+            "content": "I'm a 35 years old java developer with 35.5 years of practice looking for a job. You asking how? Java runs everywhere even in my moms womb. To reach me or more info write a comment!",
             "authorName": "Peter",
             "category": "job",
             "createdAt": "2025-12-04T00:00:00.000Z"
         },
         "topic-004": {
             "_ownerId": "60f0cf0b-34b0-4abd-9769-8c42f830dffc",
-            "title": "Do You Use AI Tools in Development?",
-            "content": "Do you use AI assistants like ChatGPT or Copilot in your workflow?",
+            "title": "Do not be shy to use AI tools!",
+            "content": "Sometimes it is better to accept the truth. If everyone is driving a car, walking by is a noble act, but it won’t get you where you need to go—not fast enough, not anymore. And that’s how it is with AI. I used to pretend I didn’t need it. That my ideas were pure, untouched, “authentically mine.” But authenticity doesn’t help when you’re staring at a blank page at 2 a.m.,",
             "authorName": "Admin",
             "category": "story",
             "createdAt": "2025-12-05T00:00:00.000Z"
         },
         "topic-005": {
             "_ownerId": "35c62d76-8152-4626-8712-eeb96381bea8",
-            "title": "How Do You Stay Motivated Long-Term?",
-            "content": "Software development is a marathon. What keeps you motivated?",
+            "title": "How Do I Stayed Motivated Long-Term?",
+            "content": "Software development is a marathon. What keeps me motivated? The biggest factor was that i have enjoyed the process but also  the fact it is the only thing i have left. Also i just want to leave my moms house asap.",
             "authorName": "Peter",
             "category": "story",
             "createdAt": "2025-12-05T00:00:00.000Z"

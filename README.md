@@ -25,3 +25,12 @@ cd server
 npm install
 npm start
 ```
+
+### EXTRA TIPS:
+```
+The Application is using the "https://github.com/softuni-practice-server/softuni-practice-server"
+So you can log in with the users initialized in the server:
+peter@abv.bg : 123456
+george@abv.bg : 123456
+admin@abv.bg : admin
+```
