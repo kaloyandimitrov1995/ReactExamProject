@@ -6,7 +6,6 @@ jest.mock("../../contexts/AuthContext.jsx", () => ({
   useAuth: () => ({ isAuthenticated: true })
 }));
 
-// Mock Outlet
 jest.mock("react-router-dom", () => ({
   ...jest.requireActual("react-router-dom"),
   Outlet: () => <div>PRIVATE-CONTENT</div>,

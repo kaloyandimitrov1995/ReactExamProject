@@ -18,8 +18,6 @@ async function request(method, url, data) {
     method,
     headers: {},
   };
-
-  // Always set the header if token exists
   if (token) {
     options.headers["X-Authorization"] = token;
   }

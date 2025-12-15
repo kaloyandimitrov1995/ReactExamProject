@@ -2,7 +2,7 @@ import { render, screen } from "@testing-library/react";
 import Header from "./Header";
 import { BrowserRouter } from "react-router-dom";
 
-// Minimal fake context
+
 jest.mock("../../contexts/AuthContext.jsx", () => ({
   useAuth: () => ({
     isAuthenticated: false,
