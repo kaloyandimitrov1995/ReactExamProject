@@ -692,6 +692,12 @@ body::after {
   word-wrap: break-word;
   white-space: normal;
 }
+.search-input {
+  width: 100%;
+  padding: 10px;
+  margin: 15px 0 25px;
+  font-size: 16px;
+}
 @media (max-width: 1200px) {
   .layout {
     grid-template-columns: 260px 1fr;

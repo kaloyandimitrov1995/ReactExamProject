@@ -32,7 +32,7 @@ export default function Header() {
               <NavLink to="/profile/edit">Edit Profile</NavLink>
             </>
           )}
-
+          <NavLink to="/topics/search">Search</NavLink>
           <NavLink to="/contact">Contact</NavLink>
           <NavLink to="/faq">FAQ</NavLink>
 

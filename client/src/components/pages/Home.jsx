@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import * as topicService from '../../utils/topicService.js';
 import TopicCard from '../topics/TopicCard.jsx';
 import { useTopicUpdate } from "../../contexts/TopicUpdateContext.jsx";
+import { useTopics } from "../../contexts/TopicsContext.jsx";
 
 
 
@@ -17,6 +18,9 @@ export default function Home() {
   });
 
   const selected = Object.keys(filters).filter(k => filters[k]);
+  const { topicsSearch, loadTopics } = useTopics();
+  loadTopics();
+
 
   const filteredTopics =
     selected.length === 0

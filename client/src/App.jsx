@@ -15,6 +15,7 @@ import UserProfile from './components/pages/UserProfile.jsx';
 import NotFound from './components/pages/NotFound.jsx';
 import Sidebar from './components/layout/Sidebar.jsx';
 import TopTopicsSidebar from './components/layout/TopTopicsSidebar.jsx';
+import TopicSearch from "./components/pages/TopicSearch.jsx";
 
 
 export default function App() {
@@ -32,6 +33,7 @@ export default function App() {
           </Route>
           <Route path="/contact" element={<Contact />} />
           <Route path="/faq" element={<FAQ />} />
+          <Route path="/topics/search" element={<TopicSearch />} />
           <Route element={<PrivateRoute />}>
             <Route path="/" element={<Home />} />
             <Route path="/topics/create" element={<TopicCreate />} />
