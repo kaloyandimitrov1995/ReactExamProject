@@ -33,11 +33,11 @@ export default function App() {
           </Route>
           <Route path="/contact" element={<Contact />} />
           <Route path="/faq" element={<FAQ />} />
-          <Route path="/topics/search" element={<TopicSearch />} />
           <Route element={<PrivateRoute />}>
             <Route path="/" element={<Home />} />
             <Route path="/topics/create" element={<TopicCreate />} />
             <Route path="/topics/:topicId" element={<TopicDetails />} />
+            <Route path="/topics/search" element={<TopicSearch />} />
             <Route path="/profile/edit" element={<UserEdit />} />
             <Route path="/users/:userId" element={<UserProfile />} />
           </Route>

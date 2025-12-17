@@ -30,9 +30,10 @@ export default function Header() {
               </NavLink>
               <NavLink to="/topics/create">Create Topic</NavLink>
               <NavLink to="/profile/edit">Edit Profile</NavLink>
+              <NavLink to="/topics/search">Search</NavLink>
             </>
           )}
-          <NavLink to="/topics/search">Search</NavLink>
+          
           <NavLink to="/contact">Contact</NavLink>
           <NavLink to="/faq">FAQ</NavLink>
 
