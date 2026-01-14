@@ -5,7 +5,7 @@ Freelance News Board is a community-driven React Single Page Application (SPA) w
 The project demonstrates real-world frontend architecture using React, React Router, Context API, form validation, protected routes, and REST-style communication with the SoftUni Practice Server backend.
 
 ### 📋 Table of Contents
-  <a name="#quick-navigation"></a>
+  <div name="#quick-navigation"></div>
 | Section | Description |
 |---------|-------------|
 | [🚀 Overview](#overview) | Project goals and high-level description |
