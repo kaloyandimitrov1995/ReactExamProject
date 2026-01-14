@@ -65,9 +65,7 @@ This is a Single Page Application (SPA) built entirely on the client side using 
 - Category filters on Home page
 - Search functionality across all topics
 
-<div align="center">
-  <a href="#quick-navigation">↑ Back to Top</a>
-</div>
+ [↑ Back to Top](#-table-of-contents)
 
 ---
 
@@ -83,9 +81,7 @@ This is a Single Page Application (SPA) built entirely on the client side using 
 - `PrivateRoute`
 - `GuestRoute`
 
-<div align="center">
-  <a href="#quick-navigation">↑ Back to Top</a>
-</div>
+ [↑ Back to Top](#-table-of-contents)
 
 ---
 
@@ -109,9 +105,7 @@ This is a Single Page Application (SPA) built entirely on the client side using 
 ### Fallback
 - `*` – Not Found page
 
-<div align="center">
-  <a href="#quick-navigation">↑ Back to Top</a>
-</div>
+ [↑ Back to Top](#-table-of-contents)
 
 ---
 
@@ -144,9 +138,7 @@ All HTTP requests are centralized via `utils/api.js` and split into:
 - `likeService.js`
 - `profileService.js`
 
-<div align="center">
-  <a href="#quick-navigation">↑ Back to Top</a>
-</div>
+ [↑ Back to Top](#-table-of-contents)
 
 ---
 
@@ -164,9 +156,7 @@ All HTTP requests are centralized via `utils/api.js` and split into:
 ### Backend
 - SoftUni Practice Server
 
-<div align="center">
-  <a href="#quick-navigation">↑ Back to Top</a>
-</div>
+ [↑ Back to Top](#-table-of-contents)
 
 ---
 
@@ -198,9 +188,7 @@ All HTTP requests are centralized via `utils/api.js` and split into:
 ### Authentication
 - `X-Authorization: {accessToken}`
 
-<div align="center">
-  <a href="#quick-navigation">↑ Back to Top</a>
-</div>
+ [↑ Back to Top](#-table-of-contents)
 
 ---
 
@@ -248,7 +236,7 @@ json
   "bio": "string",
   "avatarUrl": "string"
 }
-<div align="center"> <a href="#quick-navigation">↑ Back to Top</a> </div>
+ [↑ Back to Top](#-table-of-contents)
 <a name="validation--moderation"></a>
 
 ✅ Validation & Moderation
@@ -277,7 +265,7 @@ Age range: 1–120
 
 Avatar must be a valid image URL
 
-<div align="center"> <a href="#quick-navigation">↑ Back to Top</a> </div>
+ [↑ Back to Top](#-table-of-contents)
 <a name="how-to-run"></a>
 
 ⚡ How to Run
@@ -310,7 +298,7 @@ admin@abv.bg	admin
 Backend repository:
 https://github.com/softuni-practice-server/softuni-practice-server
 
-<div align="center"> <a href="#quick-navigation">↑ Back to Top</a> </div>
+ [↑ Back to Top](#-table-of-contents)
 <a name="security"></a>
 
 🔒 Security
@@ -322,7 +310,7 @@ Authorization header injection
 
 Client-side access control
 
-<div align="center"> <a href="#quick-navigation">↑ Back to Top</a> </div>
+ [↑ Back to Top](#-table-of-contents)
 <a name="known-limitations--improvements"></a>
 
 ⚠️ Known Limitations & Improvements
@@ -332,7 +320,7 @@ Profile topic loading could be optimized via backend queries
 
 Bad words filter is simplistic and substring-based
 
-<div align="center"> <a href="#quick-navigation">↑ Back to Top</a> </div>
+ [↑ Back to Top](#-table-of-contents)
 <a name="purpose-of-the-project"></a>
 
 🎯 Purpose of the Project
@@ -348,7 +336,7 @@ Realistic frontend validation
 
 Portfolio-level React application structure
 
-<div align="center"> <a href="#quick-navigation">↑ Back to Top</a> </div>
+ [↑ Back to Top](#-table-of-contents)
 <a name="author"></a>
 
 👤 Author
@@ -357,4 +345,4 @@ Kaloyan Dimitrov
 [https://img.shields.io/badge/GitHub-Profile-blue?style=flat&logo=github](https://github.com/LuckyKaloyan)
 [https://img.shields.io/badge/LinkedIn-Profile-blue?style=flat&logo=linkedin](https://www.linkedin.com/in/kaloyan-dimitrov-79a399203/)
 
-<div align="center"> <a href="#quick-navigation">↑ Back to Top</a> </div>
+ [↑ Back to Top](#-table-of-contents)
