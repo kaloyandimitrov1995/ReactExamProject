@@ -381,7 +381,7 @@ Portfolio-level React application structure
 👤 Author
 Kaloyan Dimitrov
 
-https://img.shields.io/badge/GitHub-Profile-blue?style=flat&logo=github
-https://img.shields.io/badge/LinkedIn-Profile-blue?style=flat&logo=linkedin
+[https://img.shields.io/badge/GitHub-Profile-blue?style=flat&logo=github](https://github.com/LuckyKaloyan)
+[https://img.shields.io/badge/LinkedIn-Profile-blue?style=flat&logo=linkedin](https://www.linkedin.com/in/kaloyan-dimitrov-79a399203/)
 
 <div align="center"> <a href="#quick-navigation">↑ Back to Top</a> </div>
