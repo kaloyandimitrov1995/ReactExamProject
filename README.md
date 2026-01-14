@@ -13,7 +13,7 @@ The project demonstrates **real-world frontend architecture** using React, React
 ## 📋 Table of Contents
 
 | Section | Description |
-|-------|-------------|
+|---------|-------------|
 | [🚀 Overview](#-overview) | Project goals and high-level description |
 | [✨ Features](#-features) | User capabilities and functionality |
 | [👥 User Roles](#-user-roles) | Role-based access control |
@@ -35,12 +35,14 @@ The project demonstrates **real-world frontend architecture** using React, React
 
 The goal of **Freelance News Board** is to combine:
 
-- Community-driven discussions  
-- Freelancer visibility and engagement  
-- Topic categorization and discovery  
-- Profile-based identity  
+- Community-driven discussions
+- Freelancer visibility and engagement
+- Topic categorization and discovery
+- Profile-based identity
 
 This is a **client-side SPA** built entirely with **React**, while authentication and data persistence are handled via a REST-style backend.
+
+[↑ Back to Top](#-freelance-news-board)
 
 ---
 
@@ -67,127 +69,284 @@ This is a **client-side SPA** built entirely with **React**, while authenticatio
 - Category filters on the Home page
 - Full-text search across all topics
 
+[↑ Back to Top](#-freelance-news-board)
+
 ---
 
 ## 👥 User Roles
 
 | Role | Description | Access Level |
-|----|------------|--------------|
+|------|-------------|--------------|
 | **GUEST** | Unauthenticated users | Login, Register, FAQ, Contact |
 | **USER** | Registered users | Full access to topics, profiles, likes, comments |
+
+### 🔐 Route Protection
+
+- `PrivateRoute` - Guards authenticated-only routes
+- `GuestRoute` - Redirects authenticated users away from login/register
+
+[↑ Back to Top](#-freelance-news-board)
 
 ---
 
 ## 🗺️ Application Routes
 
 ### 🌐 Public Routes
-- `/login`
-- `/register`
-- `/contact`
-- `/faq`
+- `/login` - User authentication
+- `/register` - User registration
+- `/contact` - Contact information
+- `/faq` - Frequently asked questions
 
-### 🔒 Private Routes
-- `/`
-- `/topics/create`
-- `/topics/:topicId`
-- `/topics/search`
-- `/profile/edit`
-- `/users/:userId`
+### 🔒 Private Routes (Authenticated)
+- `/` – Home (Latest Topics)
+- `/topics/create` – Create new topic
+- `/topics/:topicId` – Topic details with comments
+- `/topics/search` – Search functionality
+- `/profile/edit` – Edit user profile
+- `/users/:userId` – User profile view
 
 ### 🚫 Fallback
-- `*` – Not Found page
+- `*` – Not Found page (404)
+
+[↑ Back to Top](#-freelance-news-board)
 
 ---
 
 ## 🏗️ Application Architecture
 
 ### 📄 Pages
-Home · Login · Register · TopicCreate · TopicDetails · TopicSearch · UserProfile · UserEdit · FAQ · Contact · NotFound
+- **Home** - Topic feed with filtering
+- **Login / Register** - Authentication forms
+- **TopicCreate** - New topic creation
+- **TopicDetails** - Single topic view with interactions
+- **TopicSearch** - Search interface
+- **UserProfile** - Profile viewing
+- **UserEdit** - Profile editing
+- **FAQ** - Help information
+- **Contact** - Contact details
+- **NotFound** - 404 page
 
 ### 🌍 Global State (Context API)
-- AuthContext  
-- ProfileContext  
-- TopicsContext  
-- LikeContext  
-- TopicUpdateContext  
+- `AuthContext` – Authentication state and token management
+- `ProfileContext` – User profile data and updates
+- `TopicsContext` – Topic loading, filtering, and searching
+- `LikeContext` – Like/unlike state management
+- `TopicUpdateContext` – Topic refresh notifications
 
 ### 🔌 Services Layer
-topicService · commentService · likeService · profileService
+All HTTP requests are centralized in `utils/api.js` and separated into:
+- `topicService.js` - Topic CRUD operations
+- `commentService.js` - Comment management
+- `likeService.js` - Like/unlike functionality
+- `profileService.js` - Profile operations
+
+[↑ Back to Top](#-freelance-news-board)
 
 ---
 
 ## 🛠️ Technology Stack
 
-### Frontend
-- React
-- React Router DOM
-- Context API
-- Fetch API
-- CSS
+### 🎨 Frontend
+- **React** - UI library
+- **React Router DOM** - Routing
+- **Context API** - State management
+- **Custom hooks** (`useForm`) - Form handling
+- **Fetch API** - HTTP requests
+- **CSS** - Styling (global + component-scoped)
 
-### Backend
-- SoftUni Practice Server
+### 🗄️ Backend
+- **SoftUni Practice Server** - REST API backend
+
+[↑ Back to Top](#-freelance-news-board)
 
 ---
 
 ## 🔌 REST Endpoints
 
-### Topics
-GET /data/topics  
-GET /data/topics/:id  
-POST /data/topics  
-PUT /data/topics/:id  
-DELETE /data/topics/:id  
+### 📰 Topics
+GET /data/topics
+GET /data/topics/:id
+POST /data/topics
+PUT /data/topics/:id
+DELETE /data/topics/:id
 
-### Comments
-GET /data/comments  
-POST /data/comments  
+### 💬 Comments
 
-### Likes
-GET /data/likes  
-POST /data/likes  
-DELETE /data/likes/:id  
+GET /data/comments?where=topicId="{topicId}"
+POST /data/comments
+
+### ❤️ Likes
+
+GET /data/likes?where=topicId="{topicId}"
+GET /data/likes?where=topicId="{topicId}" AND _ownerId="{userId}"
+POST /data/likes
+DELETE /data/likes/:id
+
+### 👤 Profiles
+
+GET /data/profiles?where=_ownerId="{userId}"
+POST /data/profiles
+PUT /data/profiles/:id
+
+### 🔑 Authentication
+
+X-Authorization: {accessToken}
+
+
+[↑ Back to Top](#-freelance-news-board)
 
 ---
 
 ## 📊 Data Model
 
-Topic · Comment · Like · Profile
+### 📰 Topic
+json
+{
+  "_id": "string",
+  "_ownerId": "string",
+  "title": "string",
+  "content": "string",
+  "category": "news | job | story",
+  "authorName": "string",
+  "createdAt": "ISO date"
+}
+### 💬 Comment
+json
+{
+  "_id": "string",
+  "topicId": "string",
+  "text": "string",
+  "authorName": "string"
+}
+### ❤️ Like
+json
+{
+  "_id": "string",
+  "topicId": "string",
+  "_ownerId": "string"
+}
+### 👤 Profile
+{
+  "_id": "string",
+  "_ownerId": "string",
+  "email": "string",
+  "displayName": "string",
+  "firstName": "string",
+  "lastName": "string",
+  "job": "string",
+  "age": "number",
+  "nationality": "string",
+  "bio": "string",
+  "avatarUrl": "string"
+}
+[↑ Back to Top](#-freelance-news-board)
 
----
+## ✅ Validation & Moderation
+📰 Topics
+Title: 4–40 characters
+
+Content: 11–400 characters
+
+Category: Required (news/job/story)
+
+Bad words filter: Simple substring-based moderation
+
+🔐 Registration
+Email: Valid format required
+
+Username: 3-20 characters, unique
+
+Forbidden usernames: Blocked list
+
+Password: Confirmation matching
+
+👤 Profile
+Required fields: First name, last name, email
+
+Age: 1–120 range
+
+Avatar: Must be valid image URL
+
+[↑ Back to Top](#-freelance-news-board)
 
 ## ⚡ How to Run
+Environment:
+Node v22.21.1 on Windows 11
 
-Node v22.21.1 (Windows 11)
+### ▶️ Start the Client
+bash
+cd path/to/project
+cd client
+npm install
+npm install react-router-dom
+npm run dev
 
-npm install  
-npm run dev  
+### 🧪 Run Client Tests
+bash
+cd path/to/project
+cd client
+npm install --save-dev jest @testing-library/react @testing-library/jest-dom babel-jest @babel/preset-env @babel/preset-react
+npm test
 
----
+### 🗄️ Start the SoftUni Practice Server
+bash
+cd path/to/project
+cd server
+npm install
+npm start
 
-## 🔒 Security
+🔑 Test Accounts
+Email	Password
+peter@abv.bg	123456
+george@abv.bg	123456
+admin@abv.bg	admin
 
-Token-based authentication  
-Protected routes  
-Authorization headers  
+🔗 Backend Repository
+https://github.com/softuni-practice-server/softuni-practice-server
 
----
+[↑ Back to Top](#-freelance-news-board)
 
-## ⚠️ Known Limitations
+##🔒 Security
+Token-based authentication
 
-- loadTopics outside useEffect
-- Simple bad words filter
+Protected routes via route guards
 
----
+Authorization header injection
 
-## 🎯 Purpose
+Client-side access control
 
-Portfolio-level React SPA demonstrating real-world patterns.
+[↑ Back to Top](#-freelance-news-board)
 
----
+##⚠️ Known Limitations & Improvements
+loadTopics() is called outside useEffect in some components
 
-## 👤 Author
+Profile topic loading could be optimized via backend queries
 
-Kaloyan Dimitrov  
-https://github.com/LuckyKaloyan  
-https://www.linkedin.com/in/kaloyan-dimitrov-79a399203/
+Bad words filter is simplistic and substring-based
+
+Mobile responsiveness could be enhanced
+
+[↑ Back to Top](#-freelance-news-board)
+
+##🎯 Purpose of the Project
+This project demonstrates:
+
+SPA routing and global state management
+
+REST communication and authentication
+
+Component-driven UI architecture
+
+Realistic frontend validation
+
+Portfolio-level React application structure
+
+[↑ Back to Top](#-freelance-news-board)
+##👤 Author
+Kaloyan Dimitrov
+
+GitHub: https://github.com/LuckyKaloyan
+
+LinkedIn: https://www.linkedin.com/in/kaloyan-dimitrov-79a399203/
+
+[↑ Back to Top](#-freelance-news-board)
