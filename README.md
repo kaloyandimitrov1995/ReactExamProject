@@ -197,7 +197,9 @@ All HTTP requests are centralized via `utils/api.js` and split into:
 
 ### Topic
 json
+
 {
+
   "_id": "string",
   "_ownerId": "string",
   "title": "string",
@@ -250,6 +252,7 @@ Category: required
 Bad words filter (simple substring-based)
 
 Registration
+
 Email format validation
 
 Username length & uniqueness
@@ -271,31 +274,57 @@ Avatar must be a valid image URL
 ⚡ How to Run
 Works with Node v22.21.1 on Windows 11.
 
+
 Start the Client
+
 bash
+
 cd path/to/project
+
 cd client
+
 npm install
+
 npm install react-router-dom
+
 npm run dev
+
 Run Client Tests
+
 bash
+
 cd path/to/project
+
 cd client
+
 npm install --save-dev jest @testing-library/react @testing-library/jest-dom babel-jest @babel/preset-env @babel/preset-react
+
 npm test
+
 Start the SoftUni Practice Server
+
 bash
+
 cd path/to/project
+
 cd server
+
 npm install
+
 npm start
+
 Test Accounts
-Email	Password
-peter@abv.bg	123456
-george@abv.bg	123456
-admin@abv.bg	admin
+
+Email	- Password
+
+peter@abv.bg	- 123456
+
+george@abv.bg -	123456
+
+admin@abv.bg -	admin
+
 Backend repository:
+
 https://github.com/softuni-practice-server/softuni-practice-server
 
  [↑ Back to Top](#-table-of-contents)
@@ -343,6 +372,7 @@ Portfolio-level React application structure
 Kaloyan Dimitrov
 
 [https://img.shields.io/badge/GitHub-Profile-blue?style=flat&logo=github](https://github.com/LuckyKaloyan)
+
 [https://img.shields.io/badge/LinkedIn-Profile-blue?style=flat&logo=linkedin](https://www.linkedin.com/in/kaloyan-dimitrov-79a399203/)
 
  [↑ Back to Top](#-table-of-contents)
