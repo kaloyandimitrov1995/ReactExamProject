@@ -1,4 +1,5 @@
-const BASE_URL = "/api";
+const BASE_URL = import.meta.env.DEV ? "" : "/api";
+
 
 function getToken() {
   try {
