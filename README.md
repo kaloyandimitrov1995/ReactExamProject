@@ -306,7 +306,7 @@ https://github.com/softuni-practice-server/softuni-practice-server
 
 [↑ Back to Top](#-freelance-news-board)
 
-##🔒 Security
+## 🔒 Security
 Token-based authentication
 
 Protected routes via route guards
@@ -317,7 +317,7 @@ Client-side access control
 
 [↑ Back to Top](#-freelance-news-board)
 
-##⚠️ Known Limitations & Improvements
+## ⚠️ Known Limitations & Improvements
 loadTopics() is called outside useEffect in some components
 
 Profile topic loading could be optimized via backend queries
@@ -328,7 +328,7 @@ Mobile responsiveness could be enhanced
 
 [↑ Back to Top](#-freelance-news-board)
 
-##🎯 Purpose of the Project
+## 🎯 Purpose of the Project
 This project demonstrates:
 
 SPA routing and global state management
@@ -342,7 +342,7 @@ Realistic frontend validation
 Portfolio-level React application structure
 
 [↑ Back to Top](#-freelance-news-board)
-##👤 Author
+## 👤 Author
 Kaloyan Dimitrov
 
 GitHub: https://github.com/LuckyKaloyan
