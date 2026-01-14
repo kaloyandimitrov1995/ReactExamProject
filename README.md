@@ -250,31 +250,23 @@ X-Authorization: {accessToken}
 ## ✅ Validation & Moderation
 
 📰 Topics
-Title: 4–40 characters
-
-Content: 11–400 characters
-
-Category: Required (news/job/story)
-
-Bad words filter: Simple substring-based moderation
+  - Title: 4–40 characters
+  - Content: 11–400 characters
+  - Category: Required (news/job/story)
+  - Bad words filter: Simple substring-based moderation
 
 
 🔐 Registration
-Email: Valid format required
-
-Username: 3-20 characters, unique
-
-Forbidden usernames: Blocked list
-
-Password: Confirmation matching
+  - Email: Valid format required
+  - Username: 3-20 characters, unique
+  - Forbidden usernames: Blocked list
+  - Password: Confirmation matching
 
 
 👤 Profile
-Required fields: First name, last name, email
-
-Age: 1–120 range
-
-Avatar: Must be valid image URL
+  - Required fields: First name, last name, email
+  - Age: 1–120 range
+  - Avatar: Must be valid image URL
 
 [↑ Back to Top](#-freelance-news-board)
 
@@ -307,9 +299,9 @@ npm start
 ```
 🔑 Test Accounts
 Email	Password
-peter@abv.bg	123456
-george@abv.bg	123456
-admin@abv.bg	admin
+  - peter@abv.bg	123456
+  - george@abv.bg	123456
+  - admin@abv.bg	admin
 
 🔗 Backend Repository
 https://github.com/softuni-practice-server/softuni-practice-server
@@ -317,46 +309,33 @@ https://github.com/softuni-practice-server/softuni-practice-server
 [↑ Back to Top](#-freelance-news-board)
 
 ## 🔒 Security
-Token-based authentication
-
-Protected routes via route guards
-
-Authorization header injection
-
-Client-side access control
+  - Token-based authentication
+  - Protected routes via route guards
+  - Authorization header injection
+  - Client-side access control
 
 [↑ Back to Top](#-freelance-news-board)
 
 ## ⚠️ Known Limitations & Improvements
-loadTopics() is called outside useEffect in some components
-
-Profile topic loading could be optimized via backend queries
-
-Bad words filter is simplistic and substring-based
-
-Mobile responsiveness could be enhanced
+  - loadTopics() is called outside useEffect in some components
+  - Profile topic loading could be optimized via backend queries
+  - Bad words filter is simplistic and substring-based
+  - Mobile responsiveness could be enhanced
 
 [↑ Back to Top](#-freelance-news-board)
 
 ## 🎯 Purpose of the Project
-This project demonstrates:
-
-SPA routing and global state management
-
-REST communication and authentication
-
-Component-driven UI architecture
-
-Realistic frontend validation
-
-Portfolio-level React application structure
+  - This project demonstrates:
+  - SPA routing and global state management
+  - REST communication and authentication
+  - Component-driven UI architecture
+  - Realistic frontend validation
+  - Portfolio-level React application structure
 
 [↑ Back to Top](#-freelance-news-board)
 ## 👤 Author
 Kaloyan Dimitrov
-
-GitHub: https://github.com/LuckyKaloyan
-
-LinkedIn: https://www.linkedin.com/in/kaloyan-dimitrov-79a399203/
+  - GitHub: https://github.com/LuckyKaloyan
+  - LinkedIn: https://www.linkedin.com/in/kaloyan-dimitrov-79a399203/
 
 [↑ Back to Top](#-freelance-news-board)
