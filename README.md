@@ -164,30 +164,31 @@ All HTTP requests are centralized in `utils/api.js` and separated into:
 ## 🔌 REST Endpoints
 
 ### 📰 Topics
+```http
 GET /data/topics
 GET /data/topics/:id
 POST /data/topics
 PUT /data/topics/:id
 DELETE /data/topics/:id
-
+```
 ### 💬 Comments
-
+```http
 GET /data/comments?where=topicId="{topicId}"
 POST /data/comments
-
+```
 ### ❤️ Likes
-
+```http
 GET /data/likes?where=topicId="{topicId}"
 GET /data/likes?where=topicId="{topicId}" AND _ownerId="{userId}"
 POST /data/likes
 DELETE /data/likes/:id
-
+```
 ### 👤 Profiles
-
+```http
 GET /data/profiles?where=_ownerId="{userId}"
 POST /data/profiles
 PUT /data/profiles/:id
-
+```
 ### 🔑 Authentication
 
 X-Authorization: {accessToken}
@@ -200,7 +201,7 @@ X-Authorization: {accessToken}
 ## 📊 Data Model
 
 ### 📰 Topic
-json
+```json
 {
   "_id": "string",
   "_ownerId": "string",
@@ -210,22 +211,26 @@ json
   "authorName": "string",
   "createdAt": "ISO date"
 }
+```
 ### 💬 Comment
-json
+```json
 {
   "_id": "string",
   "topicId": "string",
   "text": "string",
   "authorName": "string"
 }
+```
 ### ❤️ Like
-json
+```json
 {
   "_id": "string",
   "topicId": "string",
   "_ownerId": "string"
 }
+```
 ### 👤 Profile
+```json
 {
   "_id": "string",
   "_ownerId": "string",
@@ -239,6 +244,7 @@ json
   "bio": "string",
   "avatarUrl": "string"
 }
+```
 [↑ Back to Top](#-freelance-news-board)
 
 ## ✅ Validation & Moderation
