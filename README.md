@@ -248,6 +248,7 @@ X-Authorization: {accessToken}
 [↑ Back to Top](#-freelance-news-board)
 
 ## ✅ Validation & Moderation
+
 📰 Topics
 Title: 4–40 characters
 
@@ -257,6 +258,7 @@ Category: Required (news/job/story)
 
 Bad words filter: Simple substring-based moderation
 
+
 🔐 Registration
 Email: Valid format required
 
@@ -265,6 +267,7 @@ Username: 3-20 characters, unique
 Forbidden usernames: Blocked list
 
 Password: Confirmation matching
+
 
 👤 Profile
 Required fields: First name, last name, email
@@ -280,27 +283,28 @@ Environment:
 Node v22.21.1 on Windows 11
 
 ### ▶️ Start the Client
-bash
+```bash
 cd path/to/project
 cd client
 npm install
 npm install react-router-dom
 npm run dev
-
+```
 ### 🧪 Run Client Tests
-bash
+```bash
 cd path/to/project
 cd client
 npm install --save-dev jest @testing-library/react @testing-library/jest-dom babel-jest @babel/preset-env @babel/preset-react
 npm test
+```
 
 ### 🗄️ Start the SoftUni Practice Server
-bash
+```bash
 cd path/to/project
 cd server
 npm install
 npm start
-
+```
 🔑 Test Accounts
 Email	Password
 peter@abv.bg	123456
