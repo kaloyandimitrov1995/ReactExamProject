@@ -39,9 +39,7 @@ The goal of Freelance News Board is to combine:
 
 This is a Single Page Application (SPA) built entirely on the client side using React, with authentication and data persistence handled by a REST-style backend.
 
-<div align="center">
-  [↑ Back to Top](#-table-of-contents)
-</div>
+ [↑ Back to Top](#-table-of-contents)
 
 ---
 
