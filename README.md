@@ -9,7 +9,10 @@
 The project demonstrates **real-world frontend architecture** using React, React Router, Context API, form validation, protected routes, and REST-style communication with the **SoftUni Practice Server** backend.
 
 ---
-
+## Link
+You can reach the app at:
+https://kaloyandimitrovreactproject.ashywave-ccca74e3.germanywestcentral.azurecontainerapps.io/
+---
 ## 📋 Table of Contents
 
 | Section | Description |
@@ -335,7 +338,7 @@ https://github.com/softuni-practice-server/softuni-practice-server
 [↑ Back to Top](#-freelance-news-board)
 ## 👤 Author
 Kaloyan Dimitrov
-  - GitHub: https://github.com/LuckyKaloyan
+  - GitHub: https://github.com/kaloyandimitrov1995
   - LinkedIn: https://www.linkedin.com/in/kaloyan-dimitrov-79a399203/
 
 [↑ Back to Top](#-freelance-news-board)
